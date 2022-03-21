@@ -15,7 +15,7 @@ namespace BAPointCloudRenderer.ObjectCreation
         /// </summary>
         public bool displayLOD = false;
 
-        //public Slider pointSize;
+        public Slider pointSize;
 
         private Material material;
         private HashSet<GameObject> gameObjectCollection = null;
@@ -37,10 +37,10 @@ namespace BAPointCloudRenderer.ObjectCreation
                 }
             }
 
-            // foreach (GameObject go in gameObjectCollection)
-            // {
-            //     go.GetComponent<Renderer>().sharedMaterial.SetFloat("_PointSize", pointSize.value);
-            // }
+            foreach (GameObject go in gameObjectCollection)
+            {
+                go.GetComponent<Renderer>().sharedMaterial.SetFloat("_PointSize", pointSize.value);
+            }
         }
 
         public override GameObject CreateGameObject(string name, Vector3[] vertexData, Color[] colorData, BoundingBox boundingBox, Transform parent)
