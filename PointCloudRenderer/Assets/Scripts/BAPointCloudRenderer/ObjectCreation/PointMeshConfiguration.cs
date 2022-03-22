@@ -1,6 +1,7 @@
 ﻿using BAPointCloudRenderer.CloudData;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BAPointCloudRenderer.ObjectCreation
 {
@@ -14,12 +15,14 @@ namespace BAPointCloudRenderer.ObjectCreation
         /// </summary>
         public bool displayLOD = false;
 
+        public Slider pointSize;
+
         private Material material;
         private HashSet<GameObject> gameObjectCollection = null;
 
         public void Start()
         {
-            material = new Material(Shader.Find("Custom/PointShader"));
+            material = new Material(Shader.Find("Unlit/PointCloudShaderMobile"));
             material.enableInstancing = true;
             gameObjectCollection = new HashSet<GameObject>();
         }
@@ -32,6 +35,11 @@ namespace BAPointCloudRenderer.ObjectCreation
                 {
                     Utility.BBDraw.DrawBoundingBox(go.GetComponent<BoundingBoxComponent>().boundingBox, null, Color.red, false);
                 }
+            }
+
+            foreach (GameObject go in gameObjectCollection)
+            {
+                go.GetComponent<Renderer>().sharedMaterial.SetFloat("_PointSize", pointSize.value);
             }
         }
 

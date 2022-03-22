@@ -2,6 +2,7 @@
 using BAPointCloudRenderer.Loading;
 using System;
 using System.Threading;
+using System.IO;
 using UnityEngine;
 using UnityEditor;
 
@@ -37,7 +38,9 @@ namespace BAPointCloudRenderer.CloudController {
 
         private void Awake()
         {
-            if (streamingAssetsAsRoot) cloudPath = Application.streamingAssetsPath + "/" + cloudPath;
+            if (streamingAssetsAsRoot) {
+                cloudPath = Path.Combine(Application.streamingAssetsPath, cloudPath);
+            }
         }
 
         void Start() {
